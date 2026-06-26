@@ -1,0 +1,20 @@
+{
+    "resnet": {
+        "accuracy": 0.8198,
+        "precision": 0.8164,
+        "recall": 0.8151,
+        "f1": 0.8151,
+        "inference_time_ms": 0.1814,
+        "train_time_s": 245.03,
+        "parameters": 5130
+    },
+    "baby_dragon": {
+        "accuracy": 0.9587,
+        "precision": 0.9578,
+        "recall": 0.9601,
+        "f1": 0.9585,
+        "inference_time_ms": 0.604,
+        "train_time_s": 3658.4,
+        "parameters": 2032275
+    }
+}

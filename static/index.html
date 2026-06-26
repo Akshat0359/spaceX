@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SensiSpace — Satellite Land Cover Classification</title>
+    <meta name="description" content="Baby Dragon Hatchling vs ResNet-18: AI-powered satellite image land cover classification for ISRO RESPOND.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🛰️</span>
+                <span class="logo-text">Sensi<span class="accent">Space</span></span>
+            </div>
+            <div class="badge">ISRO RESPOND · Deep Learning Research</div>
+        </div>
+    </header>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <h1 class="hero-title">Baby Dragon Hatchling<br><span class="gradient-text">Land Cover Classification</span></h1>
+        <p class="hero-sub">A biologically-inspired neural architecture for satellite remote sensing — featuring lateral inhibition, contextual attention, and multi-scale feature extraction. Compared against ResNet-18 on EuroSAT (27,000 images).</p>
+    </section>
+
+    <!-- ═══ IMAGE UPLOAD ═══ -->
+    <section class="upload-section">
+        <div class="upload-card glass">
+            <h2 class="section-title">📡 Input Satellite Image</h2>
+            <div class="upload-zone" id="uploadZone">
+                <input type="file" id="fileInput" accept="image/*" hidden>
+                <div class="upload-placeholder" id="uploadPlaceholder">
+                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <p>Drag & drop a satellite image or choose an option below</p>
+                    <div class="upload-actions">
+                        <button class="btn btn-outline" id="browseBtn" type="button">📂 Upload Image</button>
+                        <button class="btn btn-accent" id="sampleBtn" type="button">🎲 Load Random EuroSAT Sample</button>
+                    </div>
+                </div>
+                <img id="preview" class="preview-img" alt="Preview" hidden>
+            </div>
+            <button class="btn btn-primary" id="analyzeBtn" disabled>
+                <span id="analyzeBtnText">🔬 Run Classification</span>
+                <span class="spinner" id="analyzeSpinner" hidden></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ═══ RESULTS: 3-SLIDE TABS ═══ -->
+    <section class="slides-section" id="slidesSection" hidden>
+        <nav class="tab-bar">
+            <button class="tab active" data-tab="cnn"><span class="tab-icon">🧠</span> ResNet-18 (CNN)</button>
+            <button class="tab" data-tab="bdh"><span class="tab-icon">🐉</span> Baby Dragon Hatchling</button>
+            <button class="tab" data-tab="compare"><span class="tab-icon">⚖️</span> Comparison</button>
+        </nav>
+
+        <!-- ── Slide 1: CNN ── -->
+        <div class="slide active" id="slide-cnn">
+            <div class="slide-inner glass">
+                <div class="slide-header">
+                    <h2>ResNet-18 <span class="tag tag-blue">CNN</span></h2>
+                    <p class="slide-desc">Standard convolutional neural network with ImageNet pre-trained weights, fine-tuned on EuroSAT satellite imagery for land cover classification.</p>
+                </div>
+                <!-- Classification Result with Color Highlight -->
+                <div class="classification-result" id="cnn-result">
+                    <div class="class-color-strip" id="cnn-color"></div>
+                    <div class="class-info">
+                        <span class="class-label">Predicted Land Cover</span>
+                        <span class="class-name" id="cnn-class">—</span>
+                        <p class="class-desc" id="cnn-desc"></p>
+                    </div>
+                    <div class="class-stats">
+                        <div class="stat-pill"><span class="stat-label">Confidence</span><span class="stat-value blue" id="cnn-conf">—</span></div>
+                        <div class="stat-pill"><span class="stat-label">Inference</span><span class="stat-value" id="cnn-time">—</span></div>
+                    </div>
+                </div>
+                <!-- Grad-CAM Visualization -->
+                <h3 class="sub-heading">🔥 Activation Heatmap (Grad-CAM)</h3>
+                <p class="cam-desc">Highlighted regions show where the model focused to classify this land cover type.</p>
+                <div class="cam-container">
+                    <img id="cnn-cam" class="cam-image" alt="ResNet Grad-CAM" hidden>
+                    <p class="muted cam-placeholder" id="cnn-cam-placeholder">Heatmap will appear after classification.</p>
+                </div>
+                <h3 class="sub-heading" style="margin-top:1.5rem;">Class Probability Distribution</h3>
+                <div class="prob-chart" id="cnn-chart"></div>
+            </div>
+        </div>
+
+        <!-- ── Slide 2: BDH ── -->
+        <div class="slide" id="slide-bdh">
+            <div class="slide-inner glass">
+                <div class="slide-header">
+                    <h2>Baby Dragon Hatchling <span class="tag tag-purple">BDH</span></h2>
+                    <p class="slide-desc">A novel biologically-inspired architecture featuring lateral inhibition, contextual attention, multi-scale feature extraction, and recurrent refinement for enhanced satellite image analysis.</p>
+                </div>
+                <div class="classification-result" id="bdh-result">
+                    <div class="class-color-strip" id="bdh-color"></div>
+                    <div class="class-info">
+                        <span class="class-label">Predicted Land Cover</span>
+                        <span class="class-name" id="bdh-class">—</span>
+                        <p class="class-desc" id="bdh-desc"></p>
+                    </div>
+                    <div class="class-stats">
+                        <div class="stat-pill"><span class="stat-label">Confidence</span><span class="stat-value purple" id="bdh-conf">—</span></div>
+                        <div class="stat-pill"><span class="stat-label">Inference</span><span class="stat-value" id="bdh-time">—</span></div>
+                    </div>
+                </div>
+                <!-- Grad-CAM Visualization -->
+                <h3 class="sub-heading">🔥 Activation Heatmap (Grad-CAM)</h3>
+                <p class="cam-desc">Highlighted regions show where BDH's biologically-inspired attention focused for its classification decision.</p>
+                <div class="cam-container">
+                    <img id="bdh-cam" class="cam-image" alt="BDH Grad-CAM" hidden>
+                    <p class="muted cam-placeholder" id="bdh-cam-placeholder">Heatmap will appear after classification.</p>
+                </div>
+                <h3 class="sub-heading" style="margin-top:1.5rem;">Class Probability Distribution</h3>
+                <div class="prob-chart" id="bdh-chart"></div>
+            </div>
+        </div>
+
+        <!-- ── Slide 3: Comparison ── -->
+        <div class="slide" id="slide-compare">
+            <div class="slide-inner glass">
+                <div class="slide-header">
+                    <h2>Head-to-Head <span class="tag tag-green">Comparison</span></h2>
+                    <p class="slide-desc">Side-by-side comparison of live inference results and historical training metrics between both architectures on the EuroSAT dataset.</p>
+                </div>
+
+                <!-- Live Comparison -->
+                <h3 class="sub-heading">🔴 Live Inference Result</h3>
+                <div class="live-compare" id="liveCompare">
+                    <p class="muted">Analyze an image to see live comparison.</p>
+                </div>
+
+                <!-- Side-by-side Grad-CAM Comparison -->
+                <h3 class="sub-heading" style="margin-top:2rem;">🔥 Attention Map Comparison</h3>
+                <div class="cam-compare" id="camCompare">
+                    <p class="muted">Grad-CAM heatmaps will appear here after classification.</p>
+                </div>
+
+                <!-- Metrics Table -->
+                <h3 class="sub-heading" style="margin-top:2rem;">📊 Training Benchmark (27,000 images · 10 epochs)</h3>
+                <div class="table-wrap">
+                    <table class="metrics-table" id="metricsTable">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th><span class="blue">ResNet-18</span></th>
+                                <th><span class="purple">Baby Dragon</span></th>
+                                <th>Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metricsBody">
+                            <tr><td colspan="4" class="muted">Loading metrics…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Legend -->
+                <h3 class="sub-heading" style="margin-top:2rem;">🗺️ Land Cover Legend</h3>
+                <div class="legend-grid" id="legendGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>ISRO RESPOND Major Project · Baby Dragon Hatchling Architecture · EuroSAT Dataset (27,000 images)</p>
+        <p style="margin-top:.3rem;font-size:.7rem;opacity:.5;">PyTorch · FastAPI · Computer Vision for Earth Observation</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
