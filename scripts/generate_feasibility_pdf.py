@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Generate Feasibility & Scalability PDF reusing ProjectPDF style."""
 
@@ -14,7 +15,7 @@ def generate():
     pdf.ln(50)
     pdf.set_font('Helvetica', 'B', 28)
     pdf.set_text_color(80, 60, 180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 18)
     pdf.set_text_color(60, 60, 60)
     pdf.cell(0, 12, 'Feasibility Analysis &', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -83,7 +84,7 @@ def generate():
 
     pdf.sub_sub_title('Cost-Benefit Analysis')
     pdf.bold_bullet('Manual analysis: ', '1 analyst processes ~50 images/day at Rs 500/day = Rs 10/image')
-    pdf.bold_bullet('SensiSpace: ', '~1,666 images/second at near-zero marginal cost')
+    pdf.bold_bullet('SpaceX: ', '~1,666 images/second at near-zero marginal cost')
     pdf.bold_bullet('Break-even: ', 'After just 100 images, the automated system saves money')
     pdf.bold_bullet('ROI: ', 'Effectively infinite - train once, run indefinitely')
 
@@ -221,14 +222,14 @@ def generate():
     pdf.ln(5)
 
     pdf.body_text(
-        'Conclusion: The SensiSpace system is fully feasible with current technology and '
+        'Conclusion: The SpaceX system is fully feasible with current technology and '
         'resources, environmentally sustainable due to its lightweight architecture (2.03M '
         'parameters, ~0.1 kWh training), and architecturally designed to scale from a single '
         'laptop to a cloud-deployed Earth monitoring service.'
     )
 
     # Save
-    path = '/Users/yashlohia/Major project/SensiSpace_Feasibility.pdf'
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_Feasibility.pdf'
     pdf.output(path)
     print(f'PDF saved to: {path}')
 

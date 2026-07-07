@@ -1,5 +1,6 @@
+import os
 #!/usr/bin/env python3
-"""Generate IEEE-format PDF paper for SensiSpace project."""
+"""Generate IEEE-format PDF paper for SpaceX project."""
 from fpdf import FPDF
 
 class IEEEPDF(FPDF):
@@ -8,7 +9,7 @@ class IEEEPDF(FPDF):
             return
         self.set_font('Helvetica', 'I', 8)
         self.set_text_color(100,100,100)
-        self.cell(0, 6, 'SensiSpace: Biologically-Inspired Deep Learning for Satellite Land Cover Classification', align='C')
+        self.cell(0, 6, 'SpaceX: Biologically-Inspired Deep Learning for Satellite Land Cover Classification', align='C')
         self.ln(4)
         self.set_draw_color(0,0,0)
         self.set_line_width(0.3)
@@ -92,7 +93,7 @@ def generate():
     pdf.ln(20)
     pdf.set_font('Helvetica', 'B', 18)
     pdf.set_text_color(0,0,0)
-    pdf.multi_cell(0, 9, 'SensiSpace: A Biologically-Inspired Deep\nLearning Architecture for Satellite\nLand Cover Classification', align='C')
+    pdf.multi_cell(0, 9, 'SpaceX: A Biologically-Inspired Deep\nLearning Architecture for Satellite\nLand Cover Classification', align='C')
     pdf.ln(6)
     pdf.set_font('Helvetica', '', 11)
     pdf.cell(0, 7, 'Yash Lohia', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -112,7 +113,7 @@ def generate():
     pdf.set_text_color(0,0,0)
     pdf.multi_cell(0, 4.5,
         'Automated land cover classification from satellite imagery is critical for environmental monitoring, '
-        'urban planning, and resource management. This paper presents SensiSpace, a satellite image classification '
+        'urban planning, and resource management. This paper presents SpaceX, a satellite image classification '
         'system featuring a novel biologically-inspired architecture called Baby Dragon Hatchling (BDH). BDH '
         'incorporates four neuroscience-inspired modules: (1) Multi-Scale Feature Pyramids for capturing objects '
         'at varying spatial scales, (2) Lateral Inhibition Blocks that sharpen feature boundaries by mimicking '
@@ -360,7 +361,7 @@ def generate():
         pdf.multi_cell(0, 4, ref)
         pdf.ln(1)
 
-    out = '/Users/yashlohia/Major project/SensiSpace_IEEE_Paper.pdf'
+    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_IEEE_Paper.pdf'
     pdf.output(out)
     print(f'IEEE Paper PDF saved to: {out}')
 

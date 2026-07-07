@@ -1,5 +1,6 @@
+import os
 #!/usr/bin/env python3
-"""Generate a professional PDF report of the SensiSpace project."""
+"""Generate a professional PDF report of the SpaceX project."""
 
 from fpdf import FPDF
 
@@ -7,7 +8,7 @@ class ProjectPDF(FPDF):
     def header(self):
         self.set_font('Helvetica', 'B', 10)
         self.set_text_color(100, 100, 100)
-        self.cell(0, 8, 'SensiSpace - Satellite Land Cover Classification', align='R')
+        self.cell(0, 8, 'SpaceX - Satellite Land Cover Classification', align='R')
         self.ln(5)
         self.set_draw_color(100, 80, 200)
         self.set_line_width(0.5)
@@ -106,7 +107,7 @@ def generate():
     pdf.ln(50)
     pdf.set_font('Helvetica', 'B', 28)
     pdf.set_text_color(80, 60, 180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 18)
     pdf.set_text_color(60, 60, 60)
     pdf.cell(0, 12, 'Satellite Land Cover Classification', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -526,7 +527,7 @@ def generate():
     )
 
     # Save
-    output_path = '/Users/yashlohia/Major project/SensiSpace_Project_Report.pdf'
+    output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_Project_Report.pdf'
     pdf.output(output_path)
     print(f'PDF saved to: {output_path}')
 

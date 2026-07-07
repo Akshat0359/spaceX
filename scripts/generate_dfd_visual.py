@@ -9,7 +9,7 @@ import numpy as np
 import os
 from fpdf import FPDF
 
-OUT_DIR = '/Users/yashlohia/Major project'
+OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs''
 IMG_DIR = os.path.join(OUT_DIR, '_dfd_imgs')
 os.makedirs(IMG_DIR, exist_ok=True)
 
@@ -57,7 +57,7 @@ def draw_context():
     ax.set_xlim(0, 10); ax.set_ylim(0, 5); ax.axis('off')
     ax.set_title('Level 0 — Context Diagram', fontsize=16, fontweight='bold', color='#503CB4', pad=15)
     styled_box(ax, 1.5, 2.5, 2, 1, 'User', '#2d8a4e', 'white', 11)
-    styled_box(ax, 5, 2.5, 2.5, 1.5, 'SensiSpace\nClassification\nSystem', '#503CB4', 'white', 11, 'circle')
+    styled_box(ax, 5, 2.5, 2.5, 1.5, 'SpaceX\nClassification\nSystem', '#503CB4', 'white', 11, 'circle')
     styled_box(ax, 8.5, 2.5, 2, 1, 'EuroSAT\nDataset', '#1a5276', 'white', 10)
     arrow(ax, 2.5, 2.8, 3.75, 2.8, 'Satellite Image')
     arrow(ax, 6.25, 2.8, 7.5, 2.8, '27K Images')
@@ -297,7 +297,7 @@ def build_pdf():
     pdf.ln(50)
     pdf.set_font('Helvetica', 'B', 32)
     pdf.set_text_color(80, 60, 180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 18)
     pdf.set_text_color(60, 60, 60)
     pdf.cell(0, 10, 'Data Flow Diagrams', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -320,7 +320,7 @@ def build_pdf():
         # Header
         pdf.set_font('Helvetica', 'I', 8)
         pdf.set_text_color(100, 100, 100)
-        pdf.cell(0, 6, 'SensiSpace - Data Flow Diagrams', align='R')
+        pdf.cell(0, 6, 'SpaceX - Data Flow Diagrams', align='R')
         pdf.ln(2)
         pdf.set_draw_color(80, 60, 180)
         pdf.set_line_width(0.4)
@@ -329,7 +329,7 @@ def build_pdf():
         # Image - fit to page width
         pdf.image(img_path, x=10, w=190)
     
-    out = os.path.join(OUT_DIR, 'SensiSpace_DFD_Visual.pdf')
+    out = os.path.join(OUT_DIR, 'SpaceX_DFD_Visual.pdf')
     pdf.output(out)
     print(f'Visual DFD PDF saved to: {out}')
     

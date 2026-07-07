@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Generate an attractive, clean Gantt chart PDF with real dates and milestones."""
 
@@ -27,7 +28,7 @@ class GanttPDF(FPDF):
         self.set_y(-12)
         self.set_font('Helvetica', '', 7)
         self.set_text_color(170, 170, 170)
-        self.cell(0, 8, f'SensiSpace Project Timeline  |  Page {self.page_no()}/{{nb}}', align='C')
+        self.cell(0, 8, f'SpaceX Project Timeline  |  Page {self.page_no()}/{{nb}}', align='C')
 
 
 def day_num(d):
@@ -84,7 +85,7 @@ def generate():
 
     pdf.set_font('Helvetica', 'B', 34)
     pdf.set_text_color(*ACCENT)
-    pdf.cell(0, 16, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 16, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font('Helvetica', '', 14)
     pdf.set_text_color(100, 100, 110)
@@ -646,7 +647,7 @@ def generate():
         pdf.set_y(y0 + 26)
 
     # Save
-    path = '/Users/yashlohia/Major project/SensiSpace_Timeline.pdf'
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_Timeline.pdf'
     pdf.output(path)
     print(f'PDF saved to: {path}')
 

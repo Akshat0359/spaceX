@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Generate PDF of the demo presentation script."""
 
@@ -8,7 +9,7 @@ class DemoPDF(FPDF):
     def header(self):
         self.set_font('Helvetica', 'B', 9)
         self.set_text_color(120, 120, 120)
-        self.cell(0, 8, 'SensiSpace - College Demo Script', align='R')
+        self.cell(0, 8, 'SpaceX - College Demo Script', align='R')
         self.ln(4)
         self.set_draw_color(80, 60, 180)
         self.set_line_width(0.4)
@@ -93,7 +94,7 @@ def generate():
     pdf.ln(40)
     pdf.set_font('Helvetica', 'B', 30)
     pdf.set_text_color(80, 60, 180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 16)
     pdf.set_text_color(80, 80, 80)
     pdf.cell(0, 10, 'College Demo Script', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -146,19 +147,19 @@ def generate():
     pdf.note('Do this 5 minutes before your demo starts.')
     pdf.action('Open Terminal and run:')
     pdf.code(
-        'cd "/Users/yashlohia/Major project"\n'
+        'cd os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs""\n'
         'source venv/bin/activate\n'
         'PYTHONPATH=$(pwd)/src uvicorn app:app --app-dir src --host 0.0.0.0 --port 8000'
     )
     pdf.action('Open Chrome -> http://localhost:8000')
-    pdf.action('Keep the PDF report open as backup: SensiSpace_Project_Report.pdf')
+    pdf.action('Keep the PDF report open as backup: SpaceX_Project_Report.pdf')
     pdf.note('Load 2-3 diverse samples beforehand (forest, city, river) so you know what to expect.')
 
     # ── STEP 1 ──
     pdf.step_title('STEP 1: Introduction (2 minutes)')
     pdf.sub('What to say:')
     pdf.say(
-        '"Good morning everyone. My project is called SensiSpace - a Satellite Land Cover '
+        '"Good morning everyone. My project is called SpaceX - a Satellite Land Cover '
         'Classification System.\n\n'
         'The problem: Organizations like ISRO collect millions of satellite images every day. '
         'Manually analyzing each image to identify what type of land it shows - is it a forest? '
@@ -386,7 +387,7 @@ def generate():
         'If a classification is wrong, say: "this shows the confidence distribution - '
         'even when wrong, the correct class usually appears in the top 3"'
     )
-    pdf.bullet('Keep the PDF report open as backup: SensiSpace_Project_Report.pdf')
+    pdf.bullet('Keep the PDF report open as backup: SpaceX_Project_Report.pdf')
     pdf.bullet('Make eye contact with the evaluator, not the screen')
     pdf.bullet('End strong with: "95.87% accuracy, 6x fewer parameters, biologically inspired"')
 
@@ -395,7 +396,7 @@ def generate():
     pdf.note('If anything goes wrong, use these:')
     pdf.sub('Start the server:')
     pdf.code(
-        'cd "/Users/yashlohia/Major project"\n'
+        'cd os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs""\n'
         'source venv/bin/activate\n'
         'PYTHONPATH=$(pwd)/src uvicorn app:app --app-dir src --host 0.0.0.0 --port 8000'
     )
@@ -403,7 +404,7 @@ def generate():
     pdf.code('git checkout returnyash')
 
     # Save
-    path = '/Users/yashlohia/Major project/SensiSpace_Demo_Script.pdf'
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_Demo_Script.pdf'
     pdf.output(path)
     print(f'PDF saved to: {path}')
 

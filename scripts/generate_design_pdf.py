@@ -1,5 +1,6 @@
+import os
 #!/usr/bin/env python3
-"""Generate Design Document PDF for SensiSpace project."""
+"""Generate Design Document PDF for SpaceX project."""
 from fpdf import FPDF
 
 class DesignPDF(FPDF):
@@ -8,7 +9,7 @@ class DesignPDF(FPDF):
             return
         self.set_font('Helvetica', 'I', 8)
         self.set_text_color(100,100,100)
-        self.cell(0, 6, 'SensiSpace - Design Document', align='R')
+        self.cell(0, 6, 'SpaceX - Design Document', align='R')
         self.ln(3)
         self.set_draw_color(80,60,180)
         self.set_line_width(0.4)
@@ -139,7 +140,7 @@ def generate():
     pdf.ln(40)
     pdf.set_font('Helvetica', 'B', 28)
     pdf.set_text_color(80,60,180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 16)
     pdf.set_text_color(60,60,60)
     pdf.cell(0, 10, 'Design Document', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -169,7 +170,7 @@ def generate():
     # --- 1A. Frontend UI ---
     pdf.sub_title('1.1 Frontend UI Design')
     pdf.body(
-        'The SensiSpace web application uses a premium dark-mode single-page interface '
+        'The SpaceX web application uses a premium dark-mode single-page interface '
         'built with HTML5, CSS3 (glassmorphism design), and vanilla JavaScript. The interface '
         'is designed for intuitive satellite image analysis with real-time feedback.'
     )
@@ -177,7 +178,7 @@ def generate():
     pdf.sub_sub('Layout Structure')
     w = [40, 90]
     pdf.trow(['Section', 'Purpose'], w, header=True)
-    pdf.trow(['Header', 'Sticky navbar with SensiSpace logo + ISRO RESPOND badge'], w)
+    pdf.trow(['Header', 'Sticky navbar with SpaceX logo + ISRO RESPOND badge'], w)
     pdf.trow(['Hero', 'Title + subtitle explaining the project at a glance'], w)
     pdf.trow(['Upload Section', 'Drag-and-drop zone + file picker + sample loader'], w)
     pdf.trow(['Results (3 tabs)', 'ResNet-18 / Baby Dragon Hatchling / Comparison'], w)
@@ -379,7 +380,7 @@ def generate():
     pdf.trow(['Modular architecture', 'BDH stages are composable: MultiScale + LateralInhibition + Attention'], w12)
 
     # Save
-    out = '/Users/yashlohia/Major project/SensiSpace_Design_Document.pdf'
+    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_Design_Document.pdf'
     pdf.output(out)
     print(f'Design Document PDF saved to: {out}')
 

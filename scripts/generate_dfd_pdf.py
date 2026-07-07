@@ -1,12 +1,13 @@
+import os
 #!/usr/bin/env python3
-"""Generate Data Flow Diagram PDF for SensiSpace project."""
+"""Generate Data Flow Diagram PDF for SpaceX project."""
 from fpdf import FPDF
 
 class DFDPDF(FPDF):
     def header(self):
         if self.page_no()==1: return
         self.set_font('Helvetica','I',8); self.set_text_color(100,100,100)
-        self.cell(0,6,'SensiSpace - Data Flow Diagrams',align='R'); self.ln(3)
+        self.cell(0,6,'SpaceX - Data Flow Diagrams',align='R'); self.ln(3)
         self.set_draw_color(80,60,180); self.set_line_width(0.4)
         self.line(10,self.get_y(),200,self.get_y()); self.ln(4)
     def footer(self):
@@ -65,7 +66,7 @@ def generate():
     # TITLE PAGE
     pdf.add_page(); pdf.ln(40)
     pdf.set_font('Helvetica','B',28); pdf.set_text_color(80,60,180)
-    pdf.cell(0,15,'SensiSpace',align='C',new_x="LMARGIN",new_y="NEXT")
+    pdf.cell(0,15,'SpaceX',align='C',new_x="LMARGIN",new_y="NEXT")
     pdf.set_font('Helvetica','',16); pdf.set_text_color(60,60,60)
     pdf.cell(0,10,'Data Flow Diagrams',align='C',new_x="LMARGIN",new_y="NEXT")
     pdf.ln(8); pdf.set_draw_color(80,60,180); pdf.set_line_width(1)
@@ -78,10 +79,10 @@ def generate():
 
     # ══ LEVEL 0 ══
     pdf.add_page(); pdf.stitle('1. Level 0 - Context Diagram')
-    pdf.body('The highest-level view showing SensiSpace as a single process boundary interacting with external entities - the User and the EuroSAT satellite dataset.')
+    pdf.body('The highest-level view showing SpaceX as a single process boundary interacting with external entities - the User and the EuroSAT satellite dataset.')
     # Draw context diagram
     pdf.flow_box(15,65,40,15,'User',50,120,50)
-    pdf.flow_box(80,55,50,15,'SensiSpace\nSystem',80,60,180)
+    pdf.flow_box(80,55,50,15,'SpaceX\nSystem',80,60,180)
     pdf.flow_box(80,80,50,15,'EuroSAT Dataset',40,40,120)
     pdf.flow_box(155,65,40,15,'Results',50,120,50)
     pdf.flow_arrow(55,72,80,62); pdf.flow_arrow(130,62,155,72)
@@ -95,7 +96,7 @@ def generate():
 
     # ══ LEVEL 1 ══
     pdf.add_page(); pdf.stitle('2. Level 1 - System Data Flow Diagram')
-    pdf.body('Decomposition of the SensiSpace system into four major subsystems: Training Pipeline, Inference Engine, Spectral Segmentation, and Frontend Visualization.')
+    pdf.body('Decomposition of the SpaceX system into four major subsystems: Training Pipeline, Inference Engine, Spectral Segmentation, and Frontend Visualization.')
     pdf.sub2('Subsystems')
     w=[10,40,80]
     pdf.trow(['#','Subsystem','Description'],w,hdr=True)
@@ -442,7 +443,7 @@ def generate():
     pdf.bbul('Transfer vs Novel: ','ResNet leverages ImageNet knowledge; BDH learns satellite-specific features from scratch.')
     pdf.bbul('Parameter Efficiency: ','BDH has fewer parameters but compensates with architectural innovations.')
 
-    out='/Users/yashlohia/Major project/SensiSpace_DFD.pdf'
+    out=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_DFD.pdf'
     pdf.output(out)
     print(f'DFD PDF saved to: {out}')
 

@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Generate Technology Stack PDF reusing ProjectPDF style."""
 
@@ -14,7 +15,7 @@ def generate():
     pdf.ln(50)
     pdf.set_font('Helvetica', 'B', 28)
     pdf.set_text_color(80, 60, 180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 18)
     pdf.set_text_color(60, 60, 60)
     pdf.cell(0, 12, 'Technology Stack', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -107,7 +108,7 @@ def generate():
 
     pdf.sub_sub_title('Key PyTorch Components Used')
     w3 = [40, 100]
-    pdf.table_row(['Component', 'Purpose in SensiSpace'], w3, header=True)
+    pdf.table_row(['Component', 'Purpose in SpaceX'], w3, header=True)
     pdf.table_row(['nn.Conv2d', 'Convolutional layers in all model stages'], w3)
     pdf.table_row(['nn.BatchNorm2d', 'Normalizes activations for stable training'], w3)
     pdf.table_row(['nn.Linear', 'Fully connected classifier layers'], w3)
@@ -381,7 +382,7 @@ def generate():
     pdf.table_row(['fpdf2', '2.x', 'PDF generation', 'Report and docs'], w11)
 
     # Save
-    path = '/Users/yashlohia/Major project/SensiSpace_TechStack.pdf'
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_TechStack.pdf'
     pdf.output(path)
     print(f'PDF saved to: {path}')
 

@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Generate Output & Results Comparison PDF reusing ProjectPDF style."""
 
@@ -14,7 +15,7 @@ def generate():
     pdf.ln(50)
     pdf.set_font('Helvetica', 'B', 28)
     pdf.set_text_color(80, 60, 180)
-    pdf.cell(0, 15, 'SensiSpace', align='C', new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 15, 'SpaceX', align='C', new_x="LMARGIN", new_y="NEXT")
     pdf.set_font('Helvetica', '', 18)
     pdf.set_text_color(60, 60, 60)
     pdf.cell(0, 12, 'Output & Results', align='C', new_x="LMARGIN", new_y="NEXT")
@@ -293,7 +294,7 @@ def generate():
     )
 
     # Save
-    path = '/Users/yashlohia/Major project/SensiSpace_Output.pdf'
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs'/SpaceX_Output.pdf'
     pdf.output(path)
     print(f'PDF saved to: {path}')
 
