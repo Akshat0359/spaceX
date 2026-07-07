@@ -1,5 +1,5 @@
 """
-SensiSpace Backend API
+SpaceX Backend API
 ======================
 FastAPI server for satellite image land cover classification.
 Serves both models (BDH + ResNet-18) and the frontend UI.
@@ -26,7 +26,7 @@ import io
 from models.baby_dragon import BabyDragonHatchling
 from models.resnet import get_resnet
 
-app = FastAPI(title="SensiSpace API")
+app = FastAPI(title="SpaceX API")
 
 app.add_middleware(
     CORSMiddleware,
